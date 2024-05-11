@@ -7,24 +7,23 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 
 public class MainActivity extends AppCompatActivity {
 
     String currency, datefrom, dateto;
+    LineChart chart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        chart = (LineChart) findViewById(R.id.chart);
 
         // TEMPORÄRA VÄRDEN
         currency = "USD";
@@ -33,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Hämta växelkurser från API
         ArrayList<Double> currencyValues = getCurrencyValues(currency, datefrom, dateto);
-        // Skriv ut dem i konsolen (Logcat)
-        System.out.println("CurrencyValues: " + currencyValues.toString());
+
+        // Ritar charten med valutadata
+        drawLineChart(currencyValues);
     }
 
 
@@ -60,5 +60,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return currencyData;
+    }
+
+
+    private void drawLineChart(ArrayList<Double> values) {
+        ArrayList<Entry> entries = new ArrayList<>();
+        for (int i = 0; i < values.size(); i++) {
+            entries.add(new Entry(i, values.get(i).floatValue()));
+        }
+        LineDataSet dataSet = new LineDataSet(entries, "Valutakurs (" + currency + ")");
+        chart.setData(new LineData(dataSet));
+        chart.invalidate();
     }
 }
