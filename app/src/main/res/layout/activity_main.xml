@@ -16,4 +16,46 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/sma10Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="SMA 10"
+        app:layout_constraintEnd_toStartOf="@id/sma30Btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chart" />
+
+    <Button
+        android:id="@+id/sma30Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="SMA 30"
+        app:layout_constraintEnd_toStartOf="@id/valutaBtn"
+        app:layout_constraintStart_toEndOf="@id/sma10Btn"
+        app:layout_constraintTop_toBottomOf="@id/chart" />
+
+    <Button
+        android:id="@+id/valutaBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Valuta"
+        app:layout_constraintEnd_toStartOf="@id/dateBtn"
+        app:layout_constraintStart_toEndOf="@id/sma30Btn"
+        app:layout_constraintTop_toBottomOf="@id/chart" />
+
+    <Button
+        android:id="@+id/dateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Startdatum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/valutaBtn"
+        app:layout_constraintTop_toBottomOf="@id/chart" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

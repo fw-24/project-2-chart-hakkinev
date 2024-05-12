@@ -32,9 +32,22 @@ public class MainActivity extends AppCompatActivity {
 
         // Hämta växelkurser från API
         ArrayList<Double> currencyValues = getCurrencyValues(currency, datefrom, dateto);
+        // Skriv ut dem i konsolen (Logcat)
+        System.out.println("CurrencyValues: " + currencyValues.toString());
 
-        // Ritar charten med valutadata
-        drawLineChart(currencyValues);
+        // Beräkna glidande medelvärden med hjälp av Statistics-klassen
+        Statistics stats = new Statistics();
+        // Konvertera ArrayList<Double> till double[]
+        double[] currencyArray = new double[currencyValues.size()];
+        for (int i = 0; i < currencyValues.size(); i++) {
+            currencyArray[i] = currencyValues.get(i);
+        }
+
+        // Anropa movingAvg() med den konverterade arrayen
+        double[] movingAverageValues = stats.movingAvg(currencyArray, 3);
+
+        // Ritar charten med valutadata och glidande medelvärden
+        drawLineChart(currencyValues, movingAverageValues);
     }
 
 
@@ -63,13 +76,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void drawLineChart(ArrayList<Double> values) {
+    private void drawLineChart(ArrayList<Double> currencyValues, double[] movingAverageValues) {
         ArrayList<Entry> entries = new ArrayList<>();
-        for (int i = 0; i < values.size(); i++) {
-            entries.add(new Entry(i, values.get(i).floatValue()));
+        ArrayList<Entry> movingAverageEntries = new ArrayList<>();
+
+        for (int i = 0; i < currencyValues.size(); i++) {
+            entries.add(new Entry(i, currencyValues.get(i).floatValue()));
         }
+
+        for (int i = 0; i < movingAverageValues.length; i++) {
+            movingAverageEntries.add(new Entry(i, (float) movingAverageValues[i]));
+        }
+
+        // linje för ursprungliga datan (valutakursen)
         LineDataSet dataSet = new LineDataSet(entries, "Valutakurs (" + currency + ")");
-        chart.setData(new LineData(dataSet));
+        dataSet.setColor(Color.BLUE);
+        dataSet.setLineWidth(2f);
+
+        // linje för glidande medelvärden
+        LineDataSet movingAverageDataSet = new LineDataSet(movingAverageEntries, "Glidande medelvärde (" + currency + ")");
+        movingAverageDataSet.setColor(Color.RED);
+        movingAverageDataSet.setLineWidth(2f);
+
+        LineData lineData = new LineData(dataSet, movingAverageDataSet);
+        chart.setData(lineData);
         chart.invalidate();
     }
+
+
+
 }
