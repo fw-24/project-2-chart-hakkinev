@@ -8,54 +8,48 @@
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_width="632dp"
+        android:layout_height="193dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.142" />
 
     <Button
         android:id="@+id/sma10Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="120dp"
         android:text="SMA 10"
-        app:layout_constraintEnd_toStartOf="@id/sma30Btn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chart" />
+        app:layout_constraintTop_toBottomOf="@+id/chart"
+        app:layout_constraintVertical_bias="0.503" />
 
     <Button
         android:id="@+id/sma30Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
         android:text="SMA 30"
-        app:layout_constraintEnd_toStartOf="@id/valutaBtn"
-        app:layout_constraintStart_toEndOf="@id/sma10Btn"
-        app:layout_constraintTop_toBottomOf="@id/chart" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/valutaBtn"
+        app:layout_constraintStart_toEndOf="@+id/sma10Btn"
+        app:layout_constraintTop_toBottomOf="@+id/chart" />
 
     <Button
         android:id="@+id/valutaBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginEnd="112dp"
         android:text="Valuta"
-        app:layout_constraintEnd_toStartOf="@id/dateBtn"
-        app:layout_constraintStart_toEndOf="@id/sma30Btn"
-        app:layout_constraintTop_toBottomOf="@id/chart" />
-
-    <Button
-        android:id="@+id/dateBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="Startdatum"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/valutaBtn"
-        app:layout_constraintTop_toBottomOf="@id/chart" />
+        app:layout_constraintTop_toBottomOf="@+id/chart"
+        app:layout_constraintVertical_bias="0.503" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
